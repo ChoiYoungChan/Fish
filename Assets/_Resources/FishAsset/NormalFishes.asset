@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96fa1272cdb74048b341da6cf073ecb, type: 3}
+  m_Name: NormalFishes
+  m_EditorClassIdentifier: 
+  difficulty: 1
+  fishDataArray:
+  - fishType: 16
+    fishPrefab: {fileID: 5661971562627154351, guid: ea9270d6bdf2348758c5d0a26eb23bac, type: 3}
+  - fishType: 8
+    fishPrefab: {fileID: 7618492249985487222, guid: ecb91f0e5e81b4e2fa598b6a48f8a902, type: 3}
+  - fishType: 12
+    fishPrefab: {fileID: 2582799391108519662, guid: 36ff95e706938440489d5f186e80110d, type: 3}
+  - fishType: 7
+    fishPrefab: {fileID: 5228801843633336826, guid: d87f87cefbdca4a4dae8fbbf536821dd, type: 3}
+  - fishType: 4
+    fishPrefab: {fileID: 2576193984417578258, guid: 2bfd2ffa9212c41d385027d9825db881, type: 3}
+  - fishType: 5
+    fishPrefab: {fileID: 2266899853027334449, guid: ee2e4d0fab7094333a8fd5f7658fc871, type: 3}
