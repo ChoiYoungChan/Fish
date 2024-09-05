@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Linq;
 using Data;
 
 public class FishDataManager : SingletonClass<FishDataManager>

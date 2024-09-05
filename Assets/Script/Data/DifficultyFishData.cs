@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Linq;
 using Data;
 
 [CreateAssetMenu(fileName = "NewFishConfig", menuName = "Fish Config")]
