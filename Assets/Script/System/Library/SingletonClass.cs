@@ -29,10 +29,13 @@ public abstract class SingletonClass<T> : MonoBehaviour where T : MonoBehaviour
 
     protected bool CheckInstance()
     {
-        if (instance == null) {
+        if (instance == null)
+        {
             instance = this as T;
             return true;
-        } else if (Instance == this) {
+        }
+        else if (Instance == this)
+        {
             return true;
         }
 

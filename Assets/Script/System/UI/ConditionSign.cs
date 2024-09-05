@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UniRx;
@@ -18,21 +18,42 @@ public class ConditionSign : MonoBehaviour
     private FishType _fishType;
     private RectTransform _rectTransform;
 
+    /// <summary>
+    /// Awake時に初期化
+    /// </summary>
     private void Awake()
     {
         checkMarkRect.localScale = Vector3.zero;
         _rectTransform = GetComponent<RectTransform>();
+
+        // モバイルとPCの際、別scaleを適用
+#if UNITY_ANDROID
+        _rectTransform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+#else
+        _rectTransform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+#endif
+
     }
 
-    public void Init(FishType type, int remain)
+    /// <summary>
+    /// 捕まった魚数を反映する
+    /// </summary>
+    /// <param name="remain"></param>
+    private void ChangeCount(int remain)
     {
-        _fishType = type;
-        icon.sprite = signIconSprites[(int)type];
-        SetSubscribe();
-        ChangeCount(remain);
+        if (remain == 0)
+        {
+            countText.text = "";
+            checkMarkRect.DOScale(1f, 0.3f).SetEase(Ease.OutBack).SetLink(gameObject);
+        }
+        else
+        {
+            countText.text = remain.ToString();
+            _rectTransform.DOScale(_rectTransform.localScale * 1.2f, 0.1f).SetLoops(2, LoopType.Yoyo).SetLink(gameObject);
+        }
     }
 
-    void SetSubscribe()
+    private void SetSubscribe()
     {
         _stagePresenter.ObservableOnChangedConditionsRemain
             .Where(tuple => tuple.Item1 == _fishType)
@@ -40,17 +61,16 @@ public class ConditionSign : MonoBehaviour
             .AddTo(this);
     }
 
-    void ChangeCount(int remain)
+    /// <summary>
+    /// ClearConditionsViewから呼び出す初期化処理
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="remain"></param>
+    public void Init(FishType type, int remain)
     {
-        if (remain == 0)
-        {
-            countText.text = "";
-            checkMarkRect.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
-        }
-        else
-        {
-            countText.text = remain.ToString();
-            _rectTransform.DOScale(_rectTransform.localScale * 1.2f, 0.1f).SetLoops(2, LoopType.Yoyo);
-        }
+        _fishType = type;
+        icon.sprite = signIconSprites[(int)type];
+        SetSubscribe();
+        ChangeCount(remain);
     }
 }

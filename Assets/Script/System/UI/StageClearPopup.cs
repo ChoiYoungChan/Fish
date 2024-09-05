@@ -20,6 +20,6 @@ public class StageClearPopup : BasePopupView
 
     public void Close()
     {
-        Hide(null, 0.3f);
+        Hide(0.3f);
     }
 }

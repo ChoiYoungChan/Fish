@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7618492249985487222
+--- !u!1 &7535385388776581224
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6156376278570044936}
-  - component: {fileID: 4061354909105392281}
-  - component: {fileID: 16934130732135594}
+  - component: {fileID: 7264577704290588269}
+  - component: {fileID: 7476886635482217322}
+  - component: {fileID: 7947844935934301627}
   m_Layer: 7
   m_Name: Clownfish
   m_TagString: Untagged
@@ -18,29 +18,29 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6156376278570044936
+--- !u!4 &7264577704290588269
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7618492249985487222}
+  m_GameObject: {fileID: 7535385388776581224}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.341, y: -19.673, z: -0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2624471862504632633}
+  - {fileID: 4195423880822010362}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &4061354909105392281
+--- !u!136 &7476886635482217322
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7618492249985487222}
+  m_GameObject: {fileID: 7535385388776581224}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -53,17 +53,17 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.14
-  m_Height: 0.68
+  m_Radius: 0.2
+  m_Height: 0.9
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: -0.06}
---- !u!114 &16934130732135594
+--- !u!114 &7947844935934301627
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7618492249985487222}
+  m_GameObject: {fileID: 7535385388776581224}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2984cfc3f4a1e91489f0be132819659e, type: 3}
@@ -75,13 +75,13 @@ MonoBehaviour:
   _maxIdleTime: 2
   _gotchaOffsetAngle: {x: 0, y: 0, z: 90}
   FishHP: 3
---- !u!1001 &2624471862505024443
+--- !u!1001 &4195423880821615480
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6156376278570044936}
+    m_TransformParent: {fileID: 7264577704290588269}
     m_Modifications:
     - target: {fileID: 100000, guid: 13b7ab7e8d15f194ca590b1bbd11c121, type: 3}
       propertyPath: m_Layer
@@ -304,8 +304,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13b7ab7e8d15f194ca590b1bbd11c121, type: 3}
---- !u!4 &2624471862504632633 stripped
+--- !u!4 &4195423880822010362 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 13b7ab7e8d15f194ca590b1bbd11c121, type: 3}
-  m_PrefabInstance: {fileID: 2624471862505024443}
+  m_PrefabInstance: {fileID: 4195423880821615480}
   m_PrefabAsset: {fileID: 0}

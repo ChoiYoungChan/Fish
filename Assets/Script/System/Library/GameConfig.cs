@@ -1,13 +1,10 @@
 
 public class GameConfig
 {
-    public int SecondsOfAutoPoi = 60;
-    public int[] PoiHPs = new[] { 10, 15, 30 };
-
     //1ステージの中に各難易度の魚が何種類いるか
-    public int EasyFishTypesInStage = 3;
-    public int NormalFishTypesInStage = 2;
-    public int HardFishTypesInStage = 2;
+    public int EasyFishTypesInStage = 2;
+    public int NormalFishTypesInStage = 1;
+    public int HardFishTypesInStage = 1;
 
     //各難易度、各種類の魚を何匹ずつ生成するか（= クリア条件の数）
     public int NumberOfEasyFish = 8;

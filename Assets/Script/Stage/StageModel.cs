@@ -23,62 +23,12 @@ namespace Model
         public IObservable<Unit> ObservableCleared => _clearSubject;
         public IObservable<(FishType, int)> ObservableOnChangedConditionsRemain => _remainConditionSubject;
 
-        public StageModel(GameConfig gameConfig)
-        {
-            _gameConfig = gameConfig;
-        }
-        
-        public StageData InitStageData()
-        {
-            //After that, when interworking with the LAMP server is completed, game data should be acquired
-            //var data = LoadStageData();
-            var data = CreateStageData();
-            SaveStageData(data);
-            
-            _curData = data;
-            return data;
-        }
+        public StageModel(GameConfig gameConfig) => _gameConfig = gameConfig;
 
-        public void ResetData()
-        {
-            PlayerPrefs.DeleteKey(StageDataKey);
-        }
-
-        public void Gotcha(FishType fishType)
-        {
-            //残りの数を減らす
-            _curData.AppearFishInfos[fishType]--;
-            
-            if (_curData.GotchaProgress.ContainsKey(fishType))
-            {
-                //もう捕まえてたら
-                _curData.GotchaProgress[fishType]++;
-            }
-            else
-            {
-                //このステージ初GETだったら
-                _curData.GotchaProgress.Add(fishType, 1);
-            }
-            
-            //クリア条件の魚だったら
-            if (_curData.IsConditionsFish(fishType))
-            {
-                UpdateRemainCondition(fishType);
-                CheckClear();
-            }
-            
-            SaveStageData(_curData);
-        }
-
-        public void UpdateRemainCondition(FishType fishType)
-        {
-            if (_curData.GotchaProgress.ContainsKey(fishType))
-            {
-                _remainConditionSubject.OnNext((fishType, _curData.ClearConditions[fishType] - _curData.GotchaProgress[fishType]));
-            }
-        }
-
-        void CheckClear()
+        /// <summary>
+        /// Clearチェック
+        /// </summary>
+        private void CheckClear()
         {
             foreach (var KeyValue in _curData.ClearConditions)
             {
@@ -93,19 +43,31 @@ namespace Model
             StageClear();
         }
 
-        void StageClear()
+        /// <summary>
+        /// ステージクリア判定
+        /// </summary>
+        private void StageClear()
         {
             _clearSubject.OnNext(Unit.Default);
         }
-        
-        void SaveStageData(StageData stageData)
+
+        /// <summary>
+        /// ステージデータをPlayerPrefabで保存
+        /// </summary>
+        /// <param name="stageData"></param>
+        private void SaveStageData(StageData stageData)
         {
             string jsonData = JsonConvert.SerializeObject(stageData);
             PlayerPrefs.SetString(StageDataKey, jsonData);
             PlayerPrefs.Save();
         }
 
-        StageData LoadStageData()
+
+        /// <summary>
+        /// TODO: 今後LAMPでデータを落として使う際に追加実装して使う関数
+        /// </summary>
+        /// <returns></returns>
+        /*StageData LoadStageData()
         {
             if (PlayerPrefs.HasKey(StageDataKey))
             {
@@ -114,9 +76,14 @@ namespace Model
                 return stageData;
             }
             return null; // データがない場合はnullを返す
-        }
+        }*/
 
-        StageData CreateStageData()
+
+        /// <summary>
+        /// ステージデータを生成
+        /// </summary>
+        /// <returns></returns>
+        private StageData CreateStageData()
         {
             var clearConditions = new Dictionary<FishType, int>();
 
@@ -129,7 +96,7 @@ namespace Model
             ShuffleArray(normalFishes);
             ShuffleArray(hardFishes);
 
-            // 출현할 물고기를 결정 및 출현 정보와 클리어 조건 한 번에 처리
+            // Dictionaryを利用して出現する魚を決定·出現情報とクリア条件を一度に処理
             Dictionary<FishType, int> appearFishInfos = new();
 
             void AddFishData(FishType[] fishes, int fishInStage, int fishInClearCondition, int numberOfFish)
@@ -154,8 +121,12 @@ namespace Model
             return new StageData(appearFishInfos, clearConditions);
         }
 
-
-        void ShuffleArray<T>(T[] array)
+        /// <summary>
+        /// 配列をシャッフル
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="array"></param>
+        private void ShuffleArray<T>(T[] array)
         {
             Random random = new Random();
             for (int i = array.Length - 1; i > 0; i--)
@@ -164,6 +135,63 @@ namespace Model
                 T temp = array[i];
                 array[i] = array[j];
                 array[j] = temp;
+            }
+        }
+
+        /// <summary>
+        /// ステージデータを初期化
+        /// </summary>
+        /// <returns></returns>
+        public StageData InitStageData()
+        {
+            // TODO: LAMPを実装してゲームデーターを取得して使う際に使用するもの
+            //var data = LoadStageData();
+            var data = CreateStageData();
+            SaveStageData(data);
+
+            _curData = data;
+            return data;
+        }
+
+        /// <summary>
+        /// PlayerPrefabデータを初期化
+        /// </summary>
+        public void ResetData()
+        {
+            PlayerPrefs.DeleteKey(StageDataKey);
+        }
+
+        public void Gotcha(FishType fishType)
+        {
+            //残りの数を減らす
+            _curData.AppearFishInfos[fishType]--;
+
+            if (_curData.GotchaProgress.ContainsKey(fishType))
+            {
+                //もう捕まえてたら
+                _curData.GotchaProgress[fishType]++;
+            }
+            else
+            {
+                //このステージ初GETだったら
+                _curData.GotchaProgress.Add(fishType, 1);
+            }
+
+            //クリア条件の魚だったら
+            if (_curData.IsConditionsFish(fishType))
+            {
+                UpdateRemainCondition(fishType);
+                CheckClear();
+            }
+
+            SaveStageData(_curData);
+        }
+
+        public void UpdateRemainCondition(FishType fishType)
+        {
+            if (_curData.GotchaProgress.ContainsKey(fishType))
+            {
+                _remainConditionSubject.OnNext((fishType, _curData.ClearConditions[fishType] - _curData.GotchaProgress[fishType]));
             }
         }
     }

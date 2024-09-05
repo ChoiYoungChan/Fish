@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using Zenject;
 using UniRx;
@@ -30,7 +30,7 @@ namespace Manager
         }
 
         /// <summary>
-        /// A function that generates Poi by type, and will be modified for multi-play in the future
+        /// Poiを生成する関数、今後マルチプレイ部分まで拡張予定
         /// </summary>
         /// <param name="poiType"></param>
         void Create(PoiType poiType)
@@ -41,7 +41,8 @@ namespace Manager
             {
                 _playerPoi = poi;
             }
-            // Add for later multi-play
+
+            // Add multiplay later 
         }
     }
 }

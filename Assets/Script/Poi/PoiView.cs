@@ -14,17 +14,18 @@ namespace View
     public enum PoiType
     {
         Player
+        // TODO: 今後マルチプレイのため追加予定
     }
 
     public interface IPoiInitialize
     {
         void SetPoiType(PoiType type);
     }
-    
+
     public class PoiView : MonoBehaviour, IPoiInitialize
     {
         public PoiType PoiType => _poiType;
-        
+
         [SerializeField] private int poiHp;
         [SerializeField] private float speed;
         [SerializeField] private List<Collider> colliders;
@@ -32,11 +33,10 @@ namespace View
         [SerializeField] private GameObject tearNet;
         [SerializeField] private GameObject splashPrefab;
         [SerializeField] private List<GameObject> poiForms;
-        
+
         [Inject] private IPoiPresenter _poiPresenter;
         [Inject] private GameConfig _gameConfig;
-        [Inject] private PoiPowerUpManager _powerUpManager;
-        
+
         private GameObject _gotchaFish;
         private bool _willTear;
         private bool _canMove;
@@ -60,41 +60,29 @@ namespace View
                 .Subscribe(_ => Up())
                 .AddTo(this);
 
-            _powerUpManager.ObservableOnPowerUp
-                .Subscribe(_ => ChangeForm())
-                .AddTo(this);
-            
-            _powerUpManager.ObservableOnFinish
-                .Subscribe(_ => ChangeForm())
-                .AddTo(this);
-
             SwitchCollider(false);
 
             _defaultPos = transform.position;
-            _offset = - transform.forward * 3f;
+            _offset = -transform.forward * 3f;
             transform.position += _offset;
             transform.DOMove(_defaultPos, 0.3f).OnComplete(() =>
             {
                 _canMove = true;
             });
-
-            ChangeForm();
         }
 
-        void Move(Vector3 targetPos)
+        private void Move(Vector3 targetPos)
         {
             if (!_canMove) return;
 
-            // transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * speed);
             transform.position = targetPos;
         }
 
-        void Up()
+        private void Up()
         {
             if (PoiType == PoiType.Player)
             {
                 SoundManager.Instance.PlaySe(SeType.Splash);
-                TapticManager.Instance.Impact(ImpactFeedback.Midium);
             }
 
             SwitchCollider(true);
@@ -112,31 +100,34 @@ namespace View
                 });
         }
 
-        void ShowSplash()
+        private void ShowSplash()
         {
             var splash = Instantiate(splashPrefab);
             splash.transform.position = transform.position + Vector3.down * 0.3f;
         }
 
-        void SwitchCollider(bool enable)
+        private void SwitchCollider(bool enable)
         {
             foreach (var collider in colliders)
             {
-                collider.enabled = enable;
+                if (collider.enabled != enable)
+                {
+                    collider.enabled = enable;
+                }
             }
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.gameObject.layer == LayerConst.Fish)
-            Gotcha(other.transform);
+            if (other.gameObject.layer == LayerConst.Fish)
+                Gotcha(other.transform);
         }
 
-        void Gotcha(Transform fishTrm)
+        private void Gotcha(Transform fishTrm)
         {
             _gotchaFish = fishTrm.gameObject;
             var fishView = _gotchaFish.GetComponent<BaseFish>();
-            
+
             if (_fishViews.Contains(fishView)) return;
 
             fishTrm.SetParent(transform, true);
@@ -144,6 +135,7 @@ namespace View
             fishView.Gotcha();
             _willTear = WillTear(fishView.FishHP);
             Damaged(fishView.FishHP);
+
             _fishViews.Add(fishView);
         }
 
@@ -160,7 +152,6 @@ namespace View
                     _fishViews[count].Collect();
                 }
                 _fishViews.Clear();
-                TapticManager.Instance.Notification(NotificationFeedback.Success);
             }
             else
             {
@@ -173,23 +164,30 @@ namespace View
         }
 
         //破れるかチェック
-        bool WillTear(int fishHp)
+        private bool WillTear(int fishHp)
         {
             return poiHp <= fishHp;
         }
 
-        void Damaged(int fishHp)
+        /// <summary>
+        /// 一度使う際に魚のHP分耐久度が下がる
+        /// </summary>
+        /// <param name="fishHp"></param>
+        private void Damaged(int fishHp)
         {
             poiHp -= fishHp;
         }
-        
-        void Tear()
+
+        /// <summary>
+        /// 破れる処理をする関数
+        /// </summary>
+        private void Tear()
         {
             normalNet.SetActive(false);
             tearNet.SetActive(true);
         }
 
-        void RemoveAction()
+        private void RemoveAction()
         {
             transform.DOMove(_defaultPos + _offset, 0.3f).OnComplete(() =>
             {
@@ -198,7 +196,7 @@ namespace View
             });
         }
 
-        void ReleaseFishes()
+        private void ReleaseFishes()
         {
             for (int count = 0; count < _fishViews.Count; count++)
             {
@@ -206,15 +204,6 @@ namespace View
                 _fishViews[count].Release();
             }
             _fishViews.Clear();
-        }
-
-        void ChangeForm()
-        {
-            for (int count = 0; count < poiForms.Count; count++)
-            {
-                poiForms[count].SetActive(count == _powerUpManager.PoiFormIndex);
-            }
-            poiHp = _gameConfig.PoiHPs[Math.Min(_powerUpManager.PoiFormIndex, _gameConfig.PoiHPs.Length - 1)];
         }
     }
 }

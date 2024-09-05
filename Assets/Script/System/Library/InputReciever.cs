@@ -17,9 +17,8 @@ namespace PoiKingyo
         void Update()
         {
             if (IsPointerOverUIObject(Input.mousePosition)) return;
-
-            //タップ開始
-            if (Input.GetMouseButtonDown(0) )
+                        
+            if (Input.GetMouseButtonDown(0)) //タップ開始
             {
                 var point = GetTapAreaPoint();
                 if (point != Vector3.zero)
@@ -40,24 +39,13 @@ namespace PoiKingyo
                 }
             }
         }
-        
-        public static bool IsPointerOverUIObject(Vector2 screenPosition) {
-            // Referencing this code for GraphicRaycaster https://gist.github.com/stramit/ead7ca1f432f3c0f181f
-            // the ray cast appears to require only eventData.position.
-            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-            eventDataCurrentPosition.position = screenPosition;
 
-            EventSystem.current.RaycastAll(eventDataCurrentPosition, raycastResults);
-            var over = raycastResults.Count > 0;
-            raycastResults.Clear();
-            return over;
-        }
 
         /// <summary>
         /// タッチした座標を取得
         /// </summary>
         /// <returns></returns>
-        Vector3 GetTapAreaPoint()
+        private Vector3 GetTapAreaPoint()
         {
             Ray ray = gameCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -71,6 +59,19 @@ namespace PoiKingyo
 
             return Vector3.zero;
         }
+
+        public static bool IsPointerOverUIObject(Vector2 screenPosition) {
+            // Referencing this code for GraphicRaycaster https://gist.github.com/stramit/ead7ca1f432f3c0f181f
+            // the ray cast appears to require only eventData.position.
+            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+            eventDataCurrentPosition.position = screenPosition;
+
+            EventSystem.current.RaycastAll(eventDataCurrentPosition, raycastResults);
+            var over = raycastResults.Count > 0;
+            raycastResults.Clear();
+            return over;
+        }
+
     }
 
 }

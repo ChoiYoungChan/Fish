@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3588917345165173622
+--- !u!1 &4732846580361572742
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3171778920947616315}
-  - component: {fileID: 8323044971944738072}
-  - component: {fileID: 5837525595430344282}
+  - component: {fileID: 6698898624178048486}
+  - component: {fileID: 1899786957258127508}
+  - component: {fileID: 5451926700521835321}
   m_Layer: 7
   m_Name: Salmon
   m_TagString: Untagged
@@ -18,29 +18,29 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3171778920947616315
+--- !u!4 &6698898624178048486
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3588917345165173622}
+  m_GameObject: {fileID: 4732846580361572742}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.269, y: -19.745, z: -1.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5433484162094910739}
+  - {fileID: 9184432301540568359}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &8323044971944738072
+--- !u!136 &1899786957258127508
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3588917345165173622}
+  m_GameObject: {fileID: 4732846580361572742}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -53,17 +53,17 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.14
-  m_Height: 0.88
+  m_Radius: 0.23
+  m_Height: 1.3
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5837525595430344282
+  m_Center: {x: 0, y: 0, z: -0.1}
+--- !u!114 &5451926700521835321
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3588917345165173622}
+  m_GameObject: {fileID: 4732846580361572742}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2984cfc3f4a1e91489f0be132819659e, type: 3}
@@ -75,13 +75,13 @@ MonoBehaviour:
   _maxIdleTime: 0.5
   _gotchaOffsetAngle: {x: 0, y: 0, z: 90}
   FishHP: 5
---- !u!1001 &5433484162095306625
+--- !u!1001 &9184432301540702133
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 3171778920947616315}
+    m_TransformParent: {fileID: 6698898624178048486}
     m_Modifications:
     - target: {fileID: 100000, guid: ca91973448d6ce24b8540435fee53fbf, type: 3}
       propertyPath: m_Layer
@@ -292,8 +292,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca91973448d6ce24b8540435fee53fbf, type: 3}
---- !u!4 &5433484162094910739 stripped
+--- !u!4 &9184432301540568359 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400018, guid: ca91973448d6ce24b8540435fee53fbf, type: 3}
-  m_PrefabInstance: {fileID: 5433484162095306625}
+  m_PrefabInstance: {fileID: 9184432301540702133}
   m_PrefabAsset: {fileID: 0}

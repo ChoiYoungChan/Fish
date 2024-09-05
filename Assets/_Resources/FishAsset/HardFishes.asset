@@ -17,12 +17,12 @@ MonoBehaviour:
   - fishType: 11
     fishPrefab: {fileID: 2585300217663683501, guid: a96b15977f5304fb9a505110d21a2ffe, type: 3}
   - fishType: 13
-    fishPrefab: {fileID: 180993093889547828, guid: fe95d1faf2a1e4a4188c04214c0d9f56, type: 3}
+    fishPrefab: {fileID: 7464303752659294591, guid: fe95d1faf2a1e4a4188c04214c0d9f56, type: 3}
   - fishType: 14
-    fishPrefab: {fileID: 4326249676482869180, guid: ea6be1c895bd24418ab58795c9804af6, type: 3}
+    fishPrefab: {fileID: 8234277122831672335, guid: ea6be1c895bd24418ab58795c9804af6, type: 3}
   - fishType: 17
-    fishPrefab: {fileID: 3588917345165173622, guid: 2b9ce06b3f04a431daca8a6eb11eb448, type: 3}
+    fishPrefab: {fileID: 4732846580361572742, guid: 2b9ce06b3f04a431daca8a6eb11eb448, type: 3}
   - fishType: 9
-    fishPrefab: {fileID: 7813911651327075646, guid: fd215855f7c08460b85898f2689db1a5, type: 3}
+    fishPrefab: {fileID: 7669075477585510341, guid: fd215855f7c08460b85898f2689db1a5, type: 3}
   - fishType: 10
-    fishPrefab: {fileID: 7302824401928513232, guid: 09eb72859e6f44b0dbeb3072d5d418d4, type: 3}
+    fishPrefab: {fileID: 4775854223861350566, guid: 09eb72859e6f44b0dbeb3072d5d418d4, type: 3}

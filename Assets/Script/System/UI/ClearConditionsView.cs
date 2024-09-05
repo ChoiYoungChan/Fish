@@ -22,7 +22,7 @@ namespace View
                 .AddTo(this);
         }
 
-        void InitConditions(Dictionary<FishType, int> conditions)
+        private void InitConditions(Dictionary<FishType, int> conditions)
         {
             if (_signs.Count > 0)
             {

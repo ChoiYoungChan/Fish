@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2266899853027334449
+--- !u!1 &3455459055560811636
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8822364394949772436}
-  - component: {fileID: 1325698142548250051}
-  - component: {fileID: 5932838765889729546}
+  - component: {fileID: 7220264206896989575}
+  - component: {fileID: 2945341591661157380}
+  - component: {fileID: 6804615065418566747}
   m_Layer: 7
   m_Name: Turtle_2
   m_TagString: Untagged
@@ -18,29 +18,29 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8822364394949772436
+--- !u!4 &7220264206896989575
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2266899853027334449}
+  m_GameObject: {fileID: 3455459055560811636}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.75, y: -19.8716, z: 1.0732}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3574749517853279781}
+  - {fileID: 2572878475534156924}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1325698142548250051
+--- !u!136 &2945341591661157380
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2266899853027334449}
+  m_GameObject: {fileID: 3455459055560811636}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -53,35 +53,35 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.2
-  m_Height: 1
+  m_Radius: 0.4
+  m_Height: 1.2
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5932838765889729546
+--- !u!114 &6804615065418566747
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2266899853027334449}
+  m_GameObject: {fileID: 3455459055560811636}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6629d348108f4c9489f59564919e12d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FishType: 4
+  FishType: 5
   _speed: 0.2
   _minIdleTime: 1
   _maxIdleTime: 2
   _gotchaOffsetAngle: {x: 0, y: 0, z: 0}
   FishHP: 3
---- !u!1001 &3574749517853154489
+--- !u!1001 &2572878475533770464
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 8822364394949772436}
+    m_TransformParent: {fileID: 7220264206896989575}
     m_Modifications:
     - target: {fileID: 100000, guid: 403a8f70e289895438d0001b57e0f7af, type: 3}
       propertyPath: m_Layer
@@ -372,8 +372,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 403a8f70e289895438d0001b57e0f7af, type: 3}
---- !u!4 &3574749517853279781 stripped
+--- !u!4 &2572878475534156924 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400028, guid: 403a8f70e289895438d0001b57e0f7af, type: 3}
-  m_PrefabInstance: {fileID: 3574749517853154489}
+  m_PrefabInstance: {fileID: 2572878475533770464}
   m_PrefabAsset: {fileID: 0}

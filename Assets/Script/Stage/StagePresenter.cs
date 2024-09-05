@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Data;
 using Model;
@@ -14,7 +14,7 @@ namespace Presenter
         public IObservable<(FishType, int)> ObservableOnChangedConditionsRemain => _changedRemainSubject;
         public IObservable<Dictionary<FishType, int>> ObservableGotchaProgress => _progressSubject;
         public IObservable<Unit> ObservableCleared => _clearedSubject;
-        
+
         private StageModel _model;
         private Subject<Dictionary<FishType, int>> _appearSubject = new();
         private Subject<Dictionary<FishType, int>> _conditionsSubject = new();
@@ -26,6 +26,24 @@ namespace Presenter
         
         [Inject] GameConfig _gameConfig;
 
+        void UpdateAppearFishes(Dictionary<FishType, int> infos)
+        {
+            _appearSubject.OnNext(infos);
+        }
+
+        void UpdateClearConditions(Dictionary<FishType, int> conditions)
+        {
+            _conditionsSubject.OnNext(conditions);
+        }
+
+        void UpdateGotchaProgress(Dictionary<FishType, int> progress)
+        {
+            _progressSubject.OnNext(progress);
+        }
+
+        /// <summary>
+        /// ステージデータを初期化
+        /// </summary>
         public void InitStage()
         {
             if (_model != null)
@@ -45,7 +63,9 @@ namespace Presenter
             _disposables.Add(disposable1);
 
             var disposable2 =
-                _model.ObservableOnChangedConditionsRemain.Subscribe(tuple => _changedRemainSubject.OnNext(tuple));
+                _model.ObservableOnChangedConditionsRemain.Subscribe(
+                    tuple => _changedRemainSubject.OnNext(tuple));
+
             _disposables.Add(disposable2);
             
             var stageData = _model.InitStageData();
@@ -65,19 +85,5 @@ namespace Presenter
             _model.Gotcha(fishType);
         }
 
-        void UpdateAppearFishes(Dictionary<FishType, int> infos)
-        {
-            _appearSubject.OnNext(infos);
-        }
-
-        void UpdateClearConditions(Dictionary<FishType, int> conditions)
-        {
-            _conditionsSubject.OnNext(conditions);
-        }
-
-        void UpdateGotchaProgress(Dictionary<FishType, int> progress)
-        {
-            _progressSubject.OnNext(progress);
-        }
     }
 }

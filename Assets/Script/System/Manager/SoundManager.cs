@@ -35,6 +35,18 @@ public class SoundManager : SingletonClass<SoundManager>
             .AddTo(this);
     }
 
+    private void PlaySeWithLoop(AudioClip clip)
+    {
+        if (seSource.isPlaying && seSource.clip == clip) return;
+        seSource.clip = clip;
+        seSource.Play();
+    }
+
+    private void PlaySeOneShot(AudioClip clip)
+    {
+        seSource.PlayOneShot(clip);
+    }
+
     public void SwitchSe()
     {
         var isOn = IsOnSe();
@@ -73,18 +85,6 @@ public class SoundManager : SingletonClass<SoundManager>
         {
             PlaySeOneShot(seClips[(int)type]);
         }
-    }
-
-    void PlaySeWithLoop(AudioClip clip)
-    {
-        if (seSource.isPlaying && seSource.clip == clip) return;
-        seSource.clip = clip;
-        seSource.Play();
-    }
-
-    void PlaySeOneShot(AudioClip clip)
-    {
-        seSource.PlayOneShot(clip);
     }
 
     public void StopSe(SeType type)

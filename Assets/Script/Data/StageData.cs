@@ -24,6 +24,11 @@ namespace Data
             GotchaProgress = new Dictionary<FishType, int>();
         }
 
+        /// <summary>
+        /// 捕まえたのか捕まえて無いのかを判断
+        /// </summary>
+        /// <param name="fishType"></param>
+        /// <returns></returns>
         public bool HasClearedCondition(FishType fishType)
         {
             //クリア

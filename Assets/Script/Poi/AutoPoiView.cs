@@ -13,30 +13,23 @@ namespace View
         [Inject] private GameConfig _gameConfig;
         
         private PoiView _poiView;
-        private bool _isActive;
-        private float _baseHeight;
 
-
-        private void Start()
-        {
-            _baseHeight = heightBaseTrm.position.y;
-        }
-
-        public void SetPoiView(PoiView poiView)
-        {
-            poiView.transform.position = transform.position;
-            poiView.transform.SetParent(transform);
-            _poiView = poiView;
-        }
-        
+        /// <summary>
+        /// TriggerEnterで魚を捕まった時
+        /// </summary>
+        /// <param name="other"></param>
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.layer == LayerConst.Fish && _isActive)
+            if (other.gameObject.layer == LayerConst.Fish)
             {
                 StartCoroutine(nameof(UpCoroutine));
             }
         }
 
+        /// <summary>
+        /// Poiを上げる処理
+        /// </summary>
+        /// <returns></returns>
         IEnumerator UpCoroutine()
         {
             if (_poiView)
@@ -44,9 +37,7 @@ namespace View
                 _poiPresenter.Up(_poiView.PoiType);
                 yield return new WaitForSeconds(1.5f);
             }
-            
-            //_poiViewがいなかったら何もしない
-            else
+            else  //_poiViewがいなかったら何もしない
             {
                 yield return null;
             }
