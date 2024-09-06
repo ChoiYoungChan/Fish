@@ -71,6 +71,10 @@ namespace View
             });
         }
 
+        /// <summary>
+        /// Poiを動かす関数
+        /// </summary>
+        /// <param name="targetPos"></param>
         private void Move(Vector3 targetPos)
         {
             if (!_canMove) return;
@@ -78,6 +82,9 @@ namespace View
             transform.position = targetPos;
         }
 
+        /// <summary>
+        /// Poiを上に上げる関数
+        /// </summary>
         private void Up()
         {
             if (PoiType == PoiType.Player)
@@ -88,6 +95,7 @@ namespace View
             SwitchCollider(true);
             var point = new Vector3(transform.position.x, _defaultPos.y, transform.position.z);
 
+            // 上げるのが終わる際の処理
             transform.DOMove(point, 0.1f)
                 .OnComplete(() =>
                 {
@@ -100,12 +108,19 @@ namespace View
                 });
         }
 
+        /// <summary>
+        /// Splashエフェクトを出す関数
+        /// </summary>
         private void ShowSplash()
         {
             var splash = Instantiate(splashPrefab);
             splash.transform.position = transform.position + Vector3.down * 0.3f;
         }
 
+        /// <summary>
+        /// PoiのColliderをtrue/false切り替える処理
+        /// </summary>
+        /// <param name="enable"></param>
         private void SwitchCollider(bool enable)
         {
             foreach (var collider in colliders)
@@ -117,12 +132,20 @@ namespace View
             }
         }
 
+        /// <summary>
+        /// OnTriggerEnterで魚を捕まったのかを判断
+        /// </summary>
+        /// <param name="other"></param>
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.layer == LayerConst.Fish)
                 Gotcha(other.transform);
         }
 
+        /// <summary>
+        /// 魚を捕まる際の処理、Poiの耐久度も下げる
+        /// </summary>
+        /// <param name="fishTrm"></param>
         private void Gotcha(Transform fishTrm)
         {
             _gotchaFish = fishTrm.gameObject;
@@ -139,9 +162,14 @@ namespace View
             _fishViews.Add(fishView);
         }
 
+        /// <summary>
+        /// 魚を捕まる際の処理をCoroutineで処理
+        /// </summary>
+        /// <returns></returns>
         IEnumerator OnGotchaCoroutine()
         {
             _canMove = false;
+            // 破れないなら
             if (!_willTear)
             {
                 yield return new WaitForSeconds(0.6f);
@@ -153,7 +181,7 @@ namespace View
                 }
                 _fishViews.Clear();
             }
-            else
+            else　// 破れた際の処理
             {
                 Tear();
                 yield return new WaitForSeconds(0.2f);
@@ -163,7 +191,11 @@ namespace View
             }
         }
 
-        //破れるかチェック
+        /// <summary>
+        /// 破れるかチェック
+        /// </summary>
+        /// <param name="fishHp"></param>
+        /// <returns></returns>
         private bool WillTear(int fishHp)
         {
             return poiHp <= fishHp;
@@ -187,6 +219,9 @@ namespace View
             tearNet.SetActive(true);
         }
 
+        /// <summary>
+        /// 破れたらPoiを画面外に隠して削除
+        /// </summary>
         private void RemoveAction()
         {
             transform.DOMove(_defaultPos + _offset, 0.3f).OnComplete(() =>
@@ -196,6 +231,9 @@ namespace View
             });
         }
 
+        /// <summary>
+        /// 魚を解放する関数
+        /// </summary>
         private void ReleaseFishes()
         {
             for (int count = 0; count < _fishViews.Count; count++)

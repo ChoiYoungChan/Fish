@@ -27,7 +27,9 @@ public class ConditionSign : MonoBehaviour
         _rectTransform = GetComponent<RectTransform>();
 
         // モバイルとPCの際、別scaleを適用
-#if UNITY_ANDROID
+#if UNITY_EDITOR
+        _rectTransform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+#elif UNITY_ANDROID
         _rectTransform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
 #else
         _rectTransform.localScale = new Vector3(0.8f, 0.8f, 0.8f);

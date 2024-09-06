@@ -161,6 +161,10 @@ namespace Model
             PlayerPrefs.DeleteKey(StageDataKey);
         }
 
+        /// <summary>
+        /// 魚を捕まった際の関数
+        /// </summary>
+        /// <param name="fishType"></param>
         public void Gotcha(FishType fishType)
         {
             //残りの数を減らす
@@ -187,6 +191,10 @@ namespace Model
             SaveStageData(_curData);
         }
 
+        /// <summary>
+        /// クリアまで残り魚の数
+        /// </summary>
+        /// <param name="fishType"></param>
         public void UpdateRemainCondition(FishType fishType)
         {
             if (_curData.GotchaProgress.ContainsKey(fishType))

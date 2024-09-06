@@ -30,7 +30,7 @@ namespace Manager
         }
 
         /// <summary>
-        /// Poiを生成する関数、今後マルチプレイ部分まで拡張予定
+        /// Poiを生成する関数
         /// </summary>
         /// <param name="poiType"></param>
         void Create(PoiType poiType)
@@ -42,7 +42,7 @@ namespace Manager
                 _playerPoi = poi;
             }
 
-            // Add multiplay later 
+            // TODO: Add multiplay later 
         }
     }
 }

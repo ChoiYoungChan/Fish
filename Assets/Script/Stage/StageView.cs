@@ -43,9 +43,7 @@ namespace View
         }
 
         /// <summary>
-        /// 現在の状況では、UniTaskを使用して性能最適化を行いました。
-        /// しかし、現状の場合ObjectPoolを利用する方法が最適化的に良いかと考えております。
-        /// 以下はその例です:
+        /// 魚の生成にUniTaskを使う事で初期起動時のフレームが落ちる問題を解決した。
         /// </summary>
         /// <param name="fishInfos">魚のタイプ</param>
         /// <param name="cancellationToken">cancellationToken</param>
@@ -77,6 +75,9 @@ namespace View
             }
         }
 
+        /// <summary>
+        /// ステージをクリアした際に一度初期化
+        /// </summary>
         private void StageCleared()
         {
             Initialize();

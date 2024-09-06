@@ -14,26 +14,7 @@ public class SoundManager : SingletonClass<SoundManager>
     [SerializeField] AudioSource seSource;
     [SerializeField] AudioSource bgmSource;
 
-    public Subject<bool> OnSwitchedSe = new Subject<bool>();
-    public Subject<bool> OnSwitchedBgm = new Subject<bool>();
-
-    private void Start()
-    {
-        PlayBgm();
-
-        OnSwitchedBgm
-            .Subscribe(on => {
-                if (on)
-                {
-                    PlayBgm();
-                }
-                else
-                {
-                    StopBGM();
-                }
-            })
-            .AddTo(this);
-    }
+    private void Start() => PlayBgm();
 
     private void PlaySeWithLoop(AudioClip clip)
     {
@@ -51,14 +32,12 @@ public class SoundManager : SingletonClass<SoundManager>
     {
         var isOn = IsOnSe();
         PlayerPrefs.SetInt("SeIsOn", System.Convert.ToInt32(isOn));
-        OnSwitchedSe.OnNext(IsOnSe());
     }
 
     public void SwitchBgm()
     {
         var isOn = IsOnBgm();
         PlayerPrefs.SetInt("BgmIsOn", System.Convert.ToInt32(isOn));
-        OnSwitchedBgm.OnNext(IsOnBgm());
     }
 
     public bool IsOnSe()
@@ -100,10 +79,5 @@ public class SoundManager : SingletonClass<SoundManager>
     {
         if (!IsOnBgm() || bgmSource.isPlaying) return;
         bgmSource.Play();
-    }
-
-    public void StopBGM()
-    {
-        bgmSource.Stop();
     }
 }

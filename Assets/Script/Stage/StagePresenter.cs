@@ -26,16 +26,28 @@ namespace Presenter
         
         [Inject] GameConfig _gameConfig;
 
+        /// <summary>
+        /// 表示する魚をアップデート
+        /// </summary>
+        /// <param name="infos"></param>
         void UpdateAppearFishes(Dictionary<FishType, int> infos)
         {
             _appearSubject.OnNext(infos);
         }
 
+        /// <summary>
+        /// クリア条件を設定
+        /// </summary>
+        /// <param name="conditions"></param>
         void UpdateClearConditions(Dictionary<FishType, int> conditions)
         {
             _conditionsSubject.OnNext(conditions);
         }
 
+        /// <summary>
+        /// 捕まった魚の数、クリア条件に対する進捗
+        /// </summary>
+        /// <param name="progress"></param>
         void UpdateGotchaProgress(Dictionary<FishType, int> progress)
         {
             _progressSubject.OnNext(progress);
@@ -46,6 +58,7 @@ namespace Presenter
         /// </summary>
         public void InitStage()
         {
+            // modelをリセット
             if (_model != null)
             {
                 _model.ResetData();
@@ -58,6 +71,7 @@ namespace Presenter
                 _disposables.Clear();
             }
 
+            // modelを生成してObservableを購読し直す
             _model = new StageModel(_gameConfig);
             var disposable1 = _model.ObservableCleared.Subscribe(_ => _clearedSubject.OnNext(Unit.Default));
             _disposables.Add(disposable1);
@@ -80,6 +94,10 @@ namespace Presenter
             }
         }
 
+        /// <summary>
+        /// 魚を捕まえる関数
+        /// </summary>
+        /// <param name="fishType"></param>
         public void Gotcha(FishType fishType)
         {
             _model.Gotcha(fishType);
